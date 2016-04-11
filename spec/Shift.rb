@@ -9,4 +9,9 @@ describe 'A shift' do
     @shift.start_time = 17
     expect(@shift.start_time).to be 17
   end
+
+  it 'has a bedtime' do
+    @shift.bedtime = 20
+    expect(@shift.bedtime).to be 20
+  end
 end
