@@ -6,6 +6,7 @@ describe 'The babysitter' do
     @babysitter.earliest_availability = 17
     @babysitter.latest_availability = 4
     @babysitter.rate_before_bedtime_in_dollars_per_hour = 12
+    @babysitter.rate_after_bedtime_in_dollars_per_hour = 8
   end
 
   it 'starts no earlier than 5:00 p.m.' do
@@ -18,5 +19,9 @@ describe 'The babysitter' do
 
   it 'makes $12 per hour before bedtime' do
     expect(@babysitter.rate_before_bedtime_in_dollars_per_hour).to be 12
+  end
+
+  it 'makes $8 per hour after bedtime' do
+    expect(@babysitter.rate_after_bedtime_in_dollars_per_hour).to be 8
   end
 end
