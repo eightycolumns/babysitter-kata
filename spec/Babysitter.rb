@@ -1,4 +1,4 @@
-require_relative '../src/babysitter.rb'
+require_relative '../src/Babysitter.rb'
 
 describe 'The babysitter' do
   before :each do
