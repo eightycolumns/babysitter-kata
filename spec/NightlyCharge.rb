@@ -25,4 +25,14 @@ describe 'The babysitter\'s nightly charge' do
 
     expect(nightly_charge.calculate_in_dollars).to be 60
   end
+
+  it 'is $40 with a start time of 6:00 p.m., a bedtime of 8:00 p.m., and an end time of 10:00 p.m.' do
+    @shift.start_time = 18
+    @shift.bedtime = 20
+    @shift.end_time = 22
+
+    nightly_charge = NightlyCharge.new(@babysitter, @shift)
+
+    expect(nightly_charge.calculate_in_dollars).to be 40
+  end
 end
