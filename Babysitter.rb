@@ -1,4 +1,18 @@
 class Babysitter
+  def initialize(
+    earliest_availability,
+    latest_availability,
+    hourly_rate_before_bedtime,
+    hourly_rate_from_bedtime_to_midnight,
+    hourly_rate_after_midnight
+  )
+    @earliest_availability = earliest_availability
+    @latest_availability = latest_availability
+    @hourly_rate_before_bedtime = hourly_rate_before_bedtime
+    @hourly_rate_from_bedtime_to_midnight = hourly_rate_from_bedtime_to_midnight
+    @hourly_rate_after_midnight = hourly_rate_after_midnight
+  end
+
   attr_accessor :earliest_availability
   attr_accessor :latest_availability
   attr_accessor :hourly_rate_before_bedtime
