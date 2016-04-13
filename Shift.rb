@@ -1,6 +1,10 @@
 class Shift
-  def initialize
+  def initialize(start_time, bedtime, end_time)
     @midnight = 24
+
+    @start_time = start_time
+    @bedtime = bedtime
+    @end_time = end_time
   end
 
   attr_accessor :start_time

@@ -35,11 +35,7 @@ end
 
 describe 'A shift' do
   before :each do
-    @shift = Shift.new
-
-    @shift.start_time = 17
-    @shift.bedtime = 20
-    @shift.end_time = 23
+    @shift = Shift.new(17, 20, 23)
   end
 
   it 'has a start time' do
@@ -70,12 +66,7 @@ describe 'The babysitter\'s nightly charge' do
     'is $60 with a start time of 5:00 p.m., a bedtime ' +
     'of 8:00 p.m., and an end time of 11:00 p.m.'
   ) do
-    shift = Shift.new
-
-    shift.start_time = 17
-    shift.bedtime = 20
-    shift.end_time = 23
-
+    shift = Shift.new(17, 20, 23)
     expect(@babysitter.nightly_charge_in_dollars(shift)).to be 60
   end
 
@@ -83,12 +74,7 @@ describe 'The babysitter\'s nightly charge' do
     'is $40 with a start time of 6:00 p.m., a bedtime ' +
     'of 8:00 p.m., and an end time of 10:00 p.m.'
   ) do
-    shift = Shift.new
-
-    shift.start_time = 18
-    shift.bedtime = 20
-    shift.end_time = 22
-
+    shift = Shift.new(18, 20, 22)
     expect(@babysitter.nightly_charge_in_dollars(shift)).to be 40
   end
 
@@ -96,12 +82,7 @@ describe 'The babysitter\'s nightly charge' do
     'is $88 with a start time of 6:00 p.m., a bedtime ' +
     'of 8:00 p.m., and an end time of 2:00 a.m.'
   ) do
-    shift = Shift.new
-
-    shift.start_time = 18
-    shift.bedtime = 20
-    shift.end_time = 2
-
+    shift = Shift.new(18, 20, 2)
     expect(@babysitter.nightly_charge_in_dollars(shift)).to be 88
   end
 
@@ -109,12 +90,7 @@ describe 'The babysitter\'s nightly charge' do
     'is $112 with a start time of 8:00 p.m., a bedtime ' +
     'of 2:00 a.m., and an end time of 4:00 a.m.'
   ) do
-    shift = Shift.new
-
-    shift.start_time = 20
-    shift.bedtime = 2
-    shift.end_time = 4
-
+    shift = Shift.new(20, 2, 4)
     expect(@babysitter.nightly_charge_in_dollars(shift)).to be 112
   end
 end
