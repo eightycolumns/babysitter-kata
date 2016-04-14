@@ -8,6 +8,14 @@ describe 'Babysitter kata' do
 
   describe 'The babysitter\'s nightly charge' do
     it (
+      'is $0 with a start time of 5:00 p.m., a bedtime ' +
+      ' of 5:00 p.m., and an end time of 5:00 p.m.'
+    ) do
+      shift = Shift.new(17, 17, 17)
+      expect(@babysitter.nightly_charge_in_dollars(shift)).to be 0
+    end
+
+    it (
       'is $60 with a start time of 5:00 p.m., a bedtime ' +
       'of 8:00 p.m., and an end time of 11:00 p.m.'
     ) do
