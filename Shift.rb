@@ -7,10 +7,6 @@ class Shift
     @end_time = end_time
   end
 
-  attr_accessor :start_time
-  attr_accessor :bedtime
-  attr_accessor :end_time
-
   def hours_before_bedtime
     if bedtime_is_after_midnight
       @midnight - @start_time

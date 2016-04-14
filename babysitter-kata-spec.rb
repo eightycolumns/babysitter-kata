@@ -6,46 +6,6 @@ describe 'Babysitter kata' do
     @babysitter = Babysitter.new(17, 4, 12, 8, 16)
   end
 
-  describe 'The babysitter' do
-    it 'starts no earlier than 5:00 p.m.' do
-      expect(@babysitter.earliest_availability).to be 17
-    end
-
-    it 'leaves no later than 4:00 a.m.' do
-      expect(@babysitter.latest_availability).to be 4
-    end
-
-    it 'makes $12 per hour before bedtime' do
-      expect(@babysitter.hourly_rate_before_bedtime).to be 12
-    end
-
-    it 'makes $8 per hour after bedtime' do
-      expect(@babysitter.hourly_rate_from_bedtime_to_midnight).to be 8
-    end
-
-    it 'makes $16 per hour after midnight' do
-      expect(@babysitter.hourly_rate_after_midnight).to be 16
-    end
-  end
-
-  describe 'A shift' do
-    before :each do
-      @shift = Shift.new(17, 20, 23)
-    end
-
-    it 'has a start time' do
-      expect(@shift.start_time).to be 17
-    end
-
-    it 'has a bedtime' do
-      expect(@shift.bedtime).to be 20
-    end
-
-    it 'has an end time' do
-      expect(@shift.end_time).to be 23
-    end
-  end
-
   describe 'The babysitter\'s nightly charge' do
     it (
       'is $60 with a start time of 5:00 p.m., a bedtime ' +

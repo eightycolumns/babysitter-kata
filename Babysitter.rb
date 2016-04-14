@@ -13,12 +13,6 @@ class Babysitter
     @hourly_rate_after_midnight = hourly_rate_after_midnight
   end
 
-  attr_accessor :earliest_availability
-  attr_accessor :latest_availability
-  attr_accessor :hourly_rate_before_bedtime
-  attr_accessor :hourly_rate_from_bedtime_to_midnight
-  attr_accessor :hourly_rate_after_midnight
-
   def nightly_charge_in_dollars(shift)
     nightly_charge_in_dollars = 0
 
