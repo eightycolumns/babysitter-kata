@@ -3,7 +3,7 @@ require './Shift.rb'
 
 describe 'Babysitter kata' do
   before :each do
-    @babysitter = Babysitter.new(17, 4, 12, 8, 16)
+    @babysitter = Babysitter.new(17, 28, 12, 8, 16)
   end
 
   describe 'The babysitter\'s nightly charge' do
@@ -19,7 +19,7 @@ describe 'Babysitter kata' do
       'is $0 with a start time of 4:00 a.m., a bedtime ' +
       'of 4:00 a.m., and an end time of 4:00 a.m.'
     ) do
-      shift = Shift.new(4, 4, 4)
+      shift = Shift.new(28, 28, 28)
       expect(@babysitter.nightly_charge_in_dollars(shift)).to be 0
     end
 
@@ -51,7 +51,7 @@ describe 'Babysitter kata' do
       'is $88 with a start time of 6:00 p.m., a bedtime ' +
       'of 8:00 p.m., and an end time of 2:00 a.m.'
     ) do
-      shift = Shift.new(18, 20, 2)
+      shift = Shift.new(18, 20, 26)
       expect(@babysitter.nightly_charge_in_dollars(shift)).to be 88
     end
 
@@ -59,7 +59,7 @@ describe 'Babysitter kata' do
       'is $112 with a start time of 8:00 p.m., a bedtime ' +
       'of 2:00 a.m., and an end time of 4:00 a.m.'
     ) do
-      shift = Shift.new(20, 2, 4)
+      shift = Shift.new(20, 26, 28)
       expect(@babysitter.nightly_charge_in_dollars(shift)).to be 112
     end
   end
