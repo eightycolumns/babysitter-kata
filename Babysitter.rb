@@ -28,7 +28,11 @@ class Babysitter
         nightly_charge_in_dollars += @hourly_rate_before_bedtime
       end
 
-      one_hour = 3600
+      seconds_per_minute = 60
+      minutes_per_hour = 60
+
+      one_hour = seconds_per_minute * minutes_per_hour
+
       time += one_hour
     end
 
