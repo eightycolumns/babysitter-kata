@@ -26,7 +26,7 @@ describe 'Babysitter kata' do
 
   describe 'Babysitter.nightly_charge_in_dollars' do
     it (
-      'raises an ArgumentError when the shift starts ' +
+      'raises an ArgumentError when a shift starts ' +
       'before the babysitter\'s earliest availability'
     ) do
       @shift.start_time = Time.new(
@@ -38,7 +38,28 @@ describe 'Babysitter kata' do
       )
 
       @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 22
+        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+      )
+
+      expect do
+        @babysitter.nightly_charge_in_dollars(@shift)
+      end.to raise_error ArgumentError
+    end
+
+    it (
+      'raises an ArgumentError when a shift ends ' +
+      'after the babysitter\'s latest availability'
+    ) do
+      @shift.start_time = Time.new(
+        @today.year, @today.month, @today.day, 17
+      )
+
+      @shift.bedtime = Time.new(
+        @today.year, @today.month, @today.day, 20
+      )
+
+      @shift.end_time = Time.new(
+        @tomorrow.year, @tomorrow.month, @tomorrow.day, 5
       )
 
       expect do
