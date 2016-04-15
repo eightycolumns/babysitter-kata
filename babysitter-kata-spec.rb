@@ -264,5 +264,25 @@ describe 'Babysitter kata' do
 
       expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 80
     end
+
+    it (
+      'is $64 with a start time of 12:00 a.m., ' +
+      'a bedtime of 12:00 a.m., ' +
+      'and an end time of 4:00 a.m.'
+    ) do
+      @shift.start_time = Time.new(
+        @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
+      )
+
+      @shift.bedtime = Time.new(
+        @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
+      )
+
+      @shift.end_time = Time.new(
+        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+      )
+
+      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 64
+    end
   end
 end
