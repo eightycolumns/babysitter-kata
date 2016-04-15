@@ -1,7 +1,7 @@
 require './Babysitter.rb'
 require './Shift.rb'
 
-describe 'Babysitter kata' do
+describe 'The babysitter\'s nightly charge' do
   before :each do
     @babysitter = Babysitter.new
 
@@ -24,305 +24,223 @@ describe 'Babysitter kata' do
     )
   end
 
-  describe 'The babysitter\'s nightly charge' do
-    it (
-      'is $0 with a start time of 5:00 p.m., ' +
-      'a bedtime of 5:00 p.m., ' +
-      'and an end time of 5:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
+  it (
+    'is $0 with a start time of 5:00 p.m., ' +
+    'a bedtime of 5:00 p.m., ' +
+    'and an end time of 5:00 p.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 17
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 17
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
+    @shift.end_time = Time.new(
+      @today.year, @today.month, @today.day, 17
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 0
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 0
+  end
 
-    it (
-      'is $0 with a start time of 4:00 a.m., ' +
-      'a bedtime of 4:00 a.m., ' +
-      'and an end time of 4:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
+  it (
+    'is $40 with a start time of 6:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 10:00 p.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 18
+    )
 
-      @shift.bedtime = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
+    @shift.end_time = Time.new(
+      @today.year, @today.month, @today.day, 22
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 0
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 40
+  end
 
-    it (
-      'is $16 with a start time of 8:00 p.m., ' +
-      'a bedtime of 8:00 p.m., ' +
-      'and an end time of 10:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+  it (
+    'is $56 with a start time of 6:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 12:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 18
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 22
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 16
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 56
+  end
 
-    it (
-      'is $60 with a start time of 5:00 p.m., ' +
-      'a bedtime of 8:00 p.m., ' +
-      'and an end time of 11:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
+  it (
+    'is $88 with a start time of 6:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 2:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 18
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 23
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 60
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 88
+  end
 
-    it (
-      'is $40 with a start time of 6:00 p.m., ' +
-      'a bedtime of 8:00 p.m., ' +
-      'and an end time of 10:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 18
-      )
+  it (
+    'is $24 with a start time of 6:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 8:00 p.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 18
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 22
-      )
+    @shift.end_time = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 40
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 24
+  end
 
-    it (
-      'is $88 with a start time of 6:00 p.m., ' +
-      'a bedtime of 8:00 p.m., ' +
-      'and an end time of 2:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 18
-      )
+  it (
+    'is $16 with a start time of 8:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 10:00 p.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
+    @shift.end_time = Time.new(
+      @today.year, @today.month, @today.day, 22
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 88
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 16
+  end
 
-    it (
-      'is $112 with a start time of 8:00 p.m., ' +
-      'a bedtime of 2:00 a.m., ' +
-      'and an end time of 4:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+  it (
+    'is $144 with a start time of 5:00 p.m., ' +
+    'a bedtime of 11:00 p.m., ' +
+    'and an end time of 4:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 17
+    )
 
-      @shift.bedtime = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 23
+    )
 
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 112
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 144
+  end
 
-    it (
-      'is $36 with a start time of 6:00 p.m., ' +
-      'a bedtime of 9:00 p.m., ' +
-      'and an end time of 9:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 18
-      )
+  it (
+    'is $148 with a start time of 5:00 p.m., ' +
+    'a bedtime of 1:00 a.m., ' +
+    'and an end time of 4:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 17
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 21
-      )
+    @shift.bedtime = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 1
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 21
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 36
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 148
+  end
 
-    it (
-      'is $36 with a start time of 6:00 p.m., ' +
-      'a bedtime of 10:00 p.m., ' +
-      'and an end time of 9:00 p.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 18
-      )
+  it (
+    'is $96 with a start time of 8:00 p.m., ' +
+    'a bedtime of 8:00 p.m., ' +
+    'and an end time of 4:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 22
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 20
+    )
 
-      @shift.end_time = Time.new(
-        @today.year, @today.month, @today.day, 21
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 36
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 96
+  end
 
-    it (
-      'is $100 with a start time of 5:00 p.m., ' +
-      'a bedtime of 8:00 p.m. ' +
-      'and an end time of 2:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
+  it (
+    'is $64 with a start time of 12:00 a.m., ' +
+    'a bedtime of 12:00 a.m., ' +
+    'and an end time of 4:00 a.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
+    )
 
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
+    @shift.end_time = Time.new(
+      @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 100
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 64
+  end
 
-    it (
-      'is $64 with a start time of 8:00 p.m., ' +
-      'a bedtime of 8:00 p.m., ' +
-      'and an end time of 2:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+  it (
+    'is $36 with a start time of 6:00 p.m., ' +
+    'a bedtime of 10:00 p.m., ' +
+    'and an end time of 9:00 p.m.'
+  ) do
+    @shift.start_time = Time.new(
+      @today.year, @today.month, @today.day, 18
+    )
 
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
+    @shift.bedtime = Time.new(
+      @today.year, @today.month, @today.day, 22
+    )
 
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
+    @shift.end_time = Time.new(
+      @today.year, @today.month, @today.day, 21
+    )
 
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 64
-    end
-
-    it (
-      'is $80 with a start time of 8:00 p.m., ' +
-      'a bedtime of 2:00 a.m., ' +
-      'and an end time of 2:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 20
-      )
-
-      @shift.bedtime = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
-
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 2
-      )
-
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 80
-    end
-
-    it (
-      'is $64 with a start time of 12:00 a.m., ' +
-      'a bedtime of 12:00 a.m., ' +
-      'and an end time of 4:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
-      )
-
-      @shift.bedtime = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 0
-      )
-
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
-
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 64
-    end
-
-    it (
-      'is $144 with a start time of 5:00 p.m., ' +
-      'a bedtime of 11:00 p.m., ' +
-      'and an end time of 4:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
-
-      @shift.bedtime = Time.new(
-        @today.year, @today.month, @today.day, 23
-      )
-
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
-
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 144
-    end
-
-    it (
-      'is $148 with a start time of 5:00 p.m., ' +
-      'a bedtime of 1:00 a.m., ' +
-      'and an end time of 4:00 a.m.'
-    ) do
-      @shift.start_time = Time.new(
-        @today.year, @today.month, @today.day, 17
-      )
-
-      @shift.bedtime = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 1
-      )
-
-      @shift.end_time = Time.new(
-        @tomorrow.year, @tomorrow.month, @tomorrow.day, 4
-      )
-
-      expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 148
-    end
+    expect(@babysitter.nightly_charge_in_dollars(@shift)).to be 36
   end
 end
