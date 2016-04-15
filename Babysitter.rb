@@ -9,6 +9,10 @@ class Babysitter
   )
 
   def nightly_charge_in_dollars(shift)
+    if shift_starts_before_earliest_availability(shift)
+      raise(ArgumentError, 'shift starts before earliest availability')
+    end
+
     nightly_charge_in_dollars = 0
 
     time = shift.start_time
@@ -27,5 +31,12 @@ class Babysitter
     end
 
     nightly_charge_in_dollars
+  end
+
+  private
+
+  def shift_starts_before_earliest_availability(shift)
+    start_time = (shift.start_time.hour == 0) ? 24 : shift.start_time.hour
+    start_time < @earliest_availability && start_time > @latest_availability
   end
 end
