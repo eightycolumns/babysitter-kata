@@ -1,19 +1,15 @@
-require './Babysitter.rb'
-require './Shift.rb'
+require 'date'
+require 'time'
+
+require_relative './Babysitter.rb'
+require_relative './Shift.rb'
 
 describe 'Babysitter kata' do
   before :each do
     @babysitter = Babysitter.new(17, 4, 12, 8, 16)
 
-    @today = Time.now
-
-    seconds_per_minute = 60
-    minutes_per_hour = 60
-    hours_per_day = 24
-
-    one_day = seconds_per_minute * minutes_per_hour * hours_per_day
-
-    @tomorrow = @today + one_day
+    @today = Date.today
+    @tomorrow = @today + 1
   end
 
   describe 'Babysitter.charge_in_dollars' do
