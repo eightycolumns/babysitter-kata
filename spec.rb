@@ -4,24 +4,26 @@ require 'time'
 require_relative './Babysitter.rb'
 require_relative './Shift.rb'
 
-babysitter = Babysitter.new(17, 4, 12, 8, 16)
-
-today = Date.today
-tomorrow = today + 1
-
 describe 'Babysitter.charge_in_dollars' do
+  before :each do
+    @babysitter = Babysitter.new(17, 4, 12, 8, 16)
+
+    @today = Date.today
+    @tomorrow = @today + 1
+  end
+
   it (
     'raises an ArgumentError when a shift starts ' +
     'before the babysitter\'s earliest availability'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 16),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 4)
+      Time.new(@today.year, @today.month, @today.day, 16),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 4)
     )
 
-    expect { babysitter.charge_in_dollars(shift) }.to raise_error ArgumentError
+    expect { @babysitter.charge_in_dollars(shift) }.to raise_error ArgumentError
   end
 
   it (
@@ -29,29 +31,36 @@ describe 'Babysitter.charge_in_dollars' do
     'after the babysitter\'s latest availability'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 17),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 5)
+      Time.new(@today.year, @today.month, @today.day, 17),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 5)
     )
 
-    expect { babysitter.charge_in_dollars(shift) }.to raise_error ArgumentError
+    expect { @babysitter.charge_in_dollars(shift) }.to raise_error ArgumentError
   end
 end
 
 describe 'The babysitter\'s nightly charge' do
+  before :each do
+    @babysitter = Babysitter.new(17, 4, 12, 8, 16)
+
+    @today = Date.today
+    @tomorrow = @today + 1
+  end
+
   it (
     'is $0 with a start time of 5:00 p.m., a bedtime of 5:00 p.m., ' +
     'and an end time of 5:00 p.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 17),
-      Time.new(today.year, today.month, today.day, 17),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(today.year, today.month, today.day, 17)
+      Time.new(@today.year, @today.month, @today.day, 17),
+      Time.new(@today.year, @today.month, @today.day, 17),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@today.year, @today.month, @today.day, 17)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 0
+    expect(@babysitter.charge_in_dollars(shift)).to be 0
   end
 
   it (
@@ -59,13 +68,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 10:00 p.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 18),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(today.year, today.month, today.day, 22)
+      Time.new(@today.year, @today.month, @today.day, 18),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@today.year, @today.month, @today.day, 22)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 40
+    expect(@babysitter.charge_in_dollars(shift)).to be 40
   end
 
   it (
@@ -73,13 +82,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 12:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 18),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0)
+      Time.new(@today.year, @today.month, @today.day, 18),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 56
+    expect(@babysitter.charge_in_dollars(shift)).to be 56
   end
 
   it (
@@ -87,13 +96,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 2:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 18),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 2)
+      Time.new(@today.year, @today.month, @today.day, 18),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 2)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 88
+    expect(@babysitter.charge_in_dollars(shift)).to be 88
   end
 
   it (
@@ -101,13 +110,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 8:00 p.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 18),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(today.year, today.month, today.day, 20)
+      Time.new(@today.year, @today.month, @today.day, 18),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@today.year, @today.month, @today.day, 20)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 24
+    expect(@babysitter.charge_in_dollars(shift)).to be 24
   end
 
   it (
@@ -115,13 +124,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 10:00 p.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(today.year, today.month, today.day, 22)
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@today.year, @today.month, @today.day, 22)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 16
+    expect(@babysitter.charge_in_dollars(shift)).to be 16
   end
 
   it (
@@ -129,13 +138,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 4:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 17),
-      Time.new(today.year, today.month, today.day, 23),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 4)
+      Time.new(@today.year, @today.month, @today.day, 17),
+      Time.new(@today.year, @today.month, @today.day, 23),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 4)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 144
+    expect(@babysitter.charge_in_dollars(shift)).to be 144
   end
 
   it (
@@ -143,13 +152,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 4:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 17),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 1),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 4)
+      Time.new(@today.year, @today.month, @today.day, 17),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 1),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 4)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 148
+    expect(@babysitter.charge_in_dollars(shift)).to be 148
   end
 
   it (
@@ -157,13 +166,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 4:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(today.year, today.month, today.day, 20),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 4)
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@today.year, @today.month, @today.day, 20),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 4)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 96
+    expect(@babysitter.charge_in_dollars(shift)).to be 96
   end
 
   it (
@@ -171,13 +180,13 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 4:00 a.m.'
   ) do
     shift = Shift.new(
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 4)
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 4)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 64
+    expect(@babysitter.charge_in_dollars(shift)).to be 64
   end
 
   it (
@@ -185,12 +194,12 @@ describe 'The babysitter\'s nightly charge' do
     'and an end time of 9:00 p.m.'
   ) do
     shift = Shift.new(
-      Time.new(today.year, today.month, today.day, 18),
-      Time.new(today.year, today.month, today.day, 22),
-      Time.new(tomorrow.year, tomorrow.month, tomorrow.day, 0),
-      Time.new(today.year, today.month, today.day, 21)
+      Time.new(@today.year, @today.month, @today.day, 18),
+      Time.new(@today.year, @today.month, @today.day, 22),
+      Time.new(@tomorrow.year, @tomorrow.month, @tomorrow.day, 0),
+      Time.new(@today.year, @today.month, @today.day, 21)
     )
 
-    expect(babysitter.charge_in_dollars(shift)).to be 36
+    expect(@babysitter.charge_in_dollars(shift)).to be 36
   end
 end
